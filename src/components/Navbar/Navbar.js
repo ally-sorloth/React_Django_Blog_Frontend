@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +9,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
+// import { appContext } from "../../context/AppContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +29,8 @@ export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const history = useHistory();
+  // const { token, setToken } = useContext(appContext);
 
 //   const handleChange = (event) => {
 //     setAuth(event.target.checked);
@@ -49,6 +54,14 @@ export default function MenuAppBar() {
           <Typography variant="h6" className={classes.title} alignContent="flex-start">
           Awesome Blog
           </Typography>
+          <>
+            <Button onClick={() => history.push("/login")} color="inherit">
+                Login
+              </Button>
+              <Button onClick={() => history.push("/register")} color="inherit">
+                Register
+              </Button>
+            </>
           {auth && (
             <div>
               <IconButton
@@ -79,22 +92,10 @@ export default function MenuAppBar() {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
             </div>
-          ):(
-            <MenuItem
-              onClick={() => {
-                window.location.href = "/login";
-              }}
-            >
-              Sign in
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                window.location.href = "/register";
-              }}
-            >
-              Sign up
-            </MenuItem>            
-            )}
+          )}
+           
+            {/* // <Menu onClick={() => {window.location.href = "/login"}}>Sign in</Menu>
+            // <Menu onClick={() => {window.location.href = "/register"}}>Sign up</Menu>          */}
         </Toolbar>
       </AppBar>
     </div>
