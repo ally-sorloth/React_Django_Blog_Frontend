@@ -10,7 +10,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
-// import { appContext } from "../../context/AppContext";
+import { appContext } from "../../context/AppContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +44,11 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const handleLogOut = () => {
+    
+  };
+
+
   return (
     <div className={classes.root}>      
       <AppBar position="static">
@@ -71,6 +76,7 @@ export default function MenuAppBar() {
                 onClick={handleMenu}
                 color="inherit"
               >
+                {/* {username} */}
                 <AccountCircle />
               </IconButton>
               <Menu
@@ -90,6 +96,7 @@ export default function MenuAppBar() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleLogOut}>Logout</MenuItem>
               </Menu>
             </div>
           )}

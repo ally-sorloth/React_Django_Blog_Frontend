@@ -70,8 +70,8 @@ function LoginPage () {
       </Typography>
       <Formik
         initialValues={initialValues}
-        validationSchema={signInValidationSchema}
-        onSubmit={handleFormSubmit}
+        // validationSchema={signInValidationSchema}
+        // onSubmit={handleFormSubmit}
       >
         {({ handleSubmit, handleChange, values, errors }) => (
           <form onSubmit={handleSubmit}>
@@ -111,7 +111,7 @@ function LoginPage () {
                   Login
                 </Button>
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <Button
                   variant="contained"
                   color="primary"
@@ -120,7 +120,7 @@ function LoginPage () {
                 >
                   Sign In with Google
                 </Button>
-              </Grid>
+              </Grid> */}
             </Grid>
             <p style={{textAlign:"center",color:"red"}}><small>{loginError}</small></p>
           </form>
