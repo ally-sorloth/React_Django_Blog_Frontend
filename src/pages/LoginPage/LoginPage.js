@@ -10,15 +10,15 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 // import firebase from "../firebase/firebase.utils";
 import { Formik } from "formik";
-// import * as Yup from "yup";
+import * as Yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-// const signInValidationSchema = Yup.object().shape({
-//   email: Yup.string().email("Invalid Email").required("Email is required!!"),
-//   password: Yup.string()
-//     .required("No password provided.")
-//     .min(8, "Password is too short - should be 8 chars minimum."),
-// });
+const signInValidationSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid Email").required("Email is required!!"),
+  password: Yup.string()
+    .required("No password provided.")
+    .min(8, "Password is too short - should be 8 chars minimum."),
+});
 
 const stylesFunc = makeStyles((theme) => ({
   wrapper: {
@@ -70,7 +70,7 @@ function LoginPage () {
       </Typography>
       <Formik
         initialValues={initialValues}
-        // validationSchema={signInValidationSchema}
+        validationSchema={signInValidationSchema}
         // onSubmit={handleFormSubmit}
       >
         {({ handleSubmit, handleChange, values, errors }) => (

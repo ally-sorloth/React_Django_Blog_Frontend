@@ -2,6 +2,17 @@ import React from 'react';
 import { Button, Grid, TextField, Container } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from 'formik';
+import * as Yup from "yup";
+
+const signUpValidationSchema = Yup.object().shape({
+    username: Yup.string().required("Username is required"),
+    email: Yup.string().email("Invalid Email").required("Email is required!!"),
+    password: Yup.string().required("No password provided.")
+    .min(8, "Password is too short - should be 8 chars minimum."),
+    password2: Yup.string()
+     .oneOf([Yup.ref('password'), null], 'Passwords must match')
+})
+
 
 const stylesFunc = makeStyles({
     wrapper: {
@@ -18,8 +29,17 @@ function RegisterPage() {
           password:"",
           password2:""
         },
-        onSubmit: values => {
+        validationSchema: signUpValidationSchema,
+        onSubmit: async (values) => {
           alert(JSON.stringify(values, null, 2));
+          try {
+            //   const result = await postData("https://django-react-blog-36.herokuapp.com/api/user/register/", values);
+          } 
+          catch (error) {
+              
+              
+          }
+
         },
       });
     //   console.log(formik)
@@ -36,7 +56,9 @@ function RegisterPage() {
                         fullWidth
                         values={formik.initialValues.username}
                         onChange={formik.handleChange}
-                        // {...formik.getFieldProps('displayName')}
+                        // {...formik.getFieldProps('displayNa')}
+                        error={formik.errors.username}
+                        helperText={formik.errors.username}
                         // error={formik.touched.displayName && formik.errors.displayName}
                         // helperText={formik.touched.displayName && formik.errors.displayName}
                         />
@@ -50,6 +72,8 @@ function RegisterPage() {
                         values={formik.initialValues.email}
                         onChange={formik.handleChange}
                         // {...formik.getFieldProps('email')}
+                        error={formik.errors.email}
+                        helperText={formik.errors.email}
                         // error={formik.touched.email && formik.errors.email}
                         // helperText={formik.touched.email && formik.errors.email}
                         />
@@ -64,6 +88,8 @@ function RegisterPage() {
                         values={formik.initialValues.password}
                         onChange={formik.handleChange}
                         // {...formik.getFieldProps('password')}
+                        error={formik.errors.password}
+                        helperText={formik.errors.password}
                         // error={formik.touched.password && formik.errors.password}
                         // helperText={formik.touched.password && formik.errors.password}
                         />
@@ -79,6 +105,8 @@ function RegisterPage() {
                         onChange={formik.handleChange}                        
 
                         // {...formik.getFieldProps('password')}
+                        error={formik.errors.password2}
+                        helperText={formik.errors.password2}
                         // error={formik.touched.password && formik.errors.password}
                         // helperText={formik.touched.password && formik.errors.password}
                         />
