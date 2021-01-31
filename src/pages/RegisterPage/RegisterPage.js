@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Grid, TextField, Container } from '@material-ui/core';
+import { Button, Grid, TextField, Container, Avatar, Typography } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 const signUpValidationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -14,11 +15,29 @@ const signUpValidationSchema = Yup.object().shape({
 })
 
 
-const stylesFunc = makeStyles({
+const stylesFunc = makeStyles((theme) => ({
     wrapper: {
         marginTop: "10rem",
-    }
-})
+        
+        textAlign: "center"
+    },
+
+    div: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+    },
+
+    avatar: {
+        textAlign: "center",
+        backgroundColor:theme.palette.primary.main,
+
+    },
+
+    register: {
+        margin: "1rem",
+    },
+}));
 
 
 function RegisterPage() {
@@ -46,6 +65,14 @@ function RegisterPage() {
     const registerStyles = stylesFunc();
     return (
         <Container className={registerStyles.wrapper} maxWidth="sm" justify="right">
+            <div className={registerStyles.div}>
+                <Avatar className={registerStyles.avatar}>
+                    <PersonAddIcon/>
+                </Avatar>
+            </div>
+            <Typography className={registerStyles.register} variant="h4">
+                Register
+            </Typography>
             <form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={3} justify="flex-end" alignItems="flex-end">
                     <Grid item xs={12}>
