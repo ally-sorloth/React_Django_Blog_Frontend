@@ -1,12 +1,10 @@
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import Navbar from "./components/Navbar/Navbar";
 import './App.css';
+import AppRouter from "./router/Router";
 
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-      <RegisterPage/>
+     <AppRouter/>
     </div>
   );
 }

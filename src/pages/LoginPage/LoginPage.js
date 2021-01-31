@@ -8,17 +8,17 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import firebase from "../firebase/firebase.utils";
+// import firebase from "../firebase/firebase.utils";
 import { Formik } from "formik";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-const signInValidationSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid Email").required("Email is required!!"),
-  password: Yup.string()
-    .required("No password provided.")
-    .min(8, "Password is too short - should be 8 chars minimum."),
-});
+// const signInValidationSchema = Yup.object().shape({
+//   email: Yup.string().email("Invalid Email").required("Email is required!!"),
+//   password: Yup.string()
+//     .required("No password provided.")
+//     .min(8, "Password is too short - should be 8 chars minimum."),
+// });
 
 const stylesFunc = makeStyles((theme) => ({
   wrapper: {
@@ -40,20 +40,25 @@ const initialValues = {
   password: "",
 };
 
-function Signin() {
+function LoginPage () {
   const [loginError,setLoginError]=useState(null)
   const signinStyles = stylesFunc();
 
-  const handleGoogleButtonClick = () => {
-    firebase.useGoogleProvider();
-  };
+  // const handleGoogleButtonClick = () => {
+  //   firebase.useGoogleProvider();
+  // };
 
-  const handleFormSubmit = (values) => {
+  // const handleFormSubmit = async (values) => {
+  //   try {
+  //     const result = await postData
+  //   } catch (error) {
+      
+  //   }
     // alert(JSON.stringify(values, null, 2));
-    firebase.signIn(values.email, values.password).then(res=>{
-      res? setLoginError(res):setLoginError(null)
-      });
-  };
+  //   firebase.signIn(values.email, values.password).then(res=>{
+  //     res? setLoginError(res):setLoginError(null)
+  //     });
+  // };
 
   return (
     <Container className={signinStyles.wrapper} maxWidth="sm">
@@ -125,4 +130,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default LoginPage;
