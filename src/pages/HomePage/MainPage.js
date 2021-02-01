@@ -10,6 +10,7 @@ import {
   } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import PostCard from "../../components/card/PostCard";
 
 
 const stylesFunc = makeStyles((theme) => ({
@@ -54,9 +55,12 @@ function MainPage() {
     useEffect(() => {
         fetchPostData();
     }, []);
+    console.log(postList);
     return (
         <Container className={mainStyles.wrapper}>
-            MAIN PAGE
+          <PostCard
+           postlist={postList}           
+          />
         </Container>
     )
 }
