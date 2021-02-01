@@ -11,7 +11,8 @@ import { useHistory } from 'react-router-dom';
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
 
 
 
-export default function PostCard() {
+export default function PostCard({post}) {
     const {author,
         content,
         detail_url,
@@ -44,14 +45,14 @@ export default function PostCard() {
       history.push(`/detail/${slug}`);
   };
 
-// onClick={openPostDetails}
+// 
   return (
     <Card className={classes.root}>
-      <CardActionArea >
+      <CardActionArea onClick={openPostDetails} >
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
+          image={image}
+          title={title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -74,6 +75,21 @@ export default function PostCard() {
         <IconButton>
             <FavoriteIcon color={hasUserLiked ? "secondary" : "primary"}/>
         </IconButton>
+        <Typography variant="body2" color="textSecondary">
+            {get_like_count}
+        </Typography>
+        <IconButton>
+            <VisibilityIcon />
+        </IconButton>
+        <Typography variant="body2" color="textSecondary">
+            {get_view_count}
+        </Typography>
+        <IconButton>
+            <ChatBubbleOutlineIcon/>
+        </IconButton>
+        <Typography variant="body2" color="textSecondary">
+            {get_comment_count}
+        </Typography>
       </CardActions>
     </Card>
   );

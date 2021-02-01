@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { postData } from '../../services/PostData'
 
 const signUpValidationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -52,7 +53,7 @@ function RegisterPage() {
         onSubmit: async (values) => {
           alert(JSON.stringify(values, null, 2));
           try {
-            //   const result = await postData("https://django-react-blog-36.herokuapp.com/api/user/register/", values);
+              const result = await postData("https://django-react-blog-36.herokuapp.com/api/user/register/", values);
           } 
           catch (error) {
               

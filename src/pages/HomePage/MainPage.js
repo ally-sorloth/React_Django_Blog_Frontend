@@ -11,6 +11,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import PostCard from "../../components/card/PostCard";
+import PostCardList from "../../components/card/PostCardList";
 
 
 const stylesFunc = makeStyles((theme) => ({
@@ -29,14 +30,17 @@ const stylesFunc = makeStyles((theme) => ({
   }));
 
 function MainPage() {
-    const [postList, setPostList] = useState();
+  const [nextUrl, setNextUrl] = useState();
+    const [postList, setPostList] = useState([]);
+
     const mainStyles = stylesFunc();
     const { REACT_APP_API_BASE_URL } = process.env;
 
-    const fetchPostData = async() => {
+    const fetchPostList = async() => {
         try {
             const result = await axios.get(`${REACT_APP_API_BASE_URL}`);
             setPostList(...postList, ...result?.data?.data);
+            setNextUrl(result?.data?.next);
 
         }  catch ({ response }) {
           if (response) {
@@ -44,25 +48,27 @@ function MainPage() {
           } else {
             console.log("Something went wrong!");
           }
-            
         }
-        
-
-    }
-
-
+    };
 
     useEffect(() => {
-        fetchPostData();
+        fetchPostList();
     }, []);
     console.log(postList);
+
+    const handleLoadMore = () => {
+      fetchPostList(nextUrl)
+    };
+    if (!postList?.length) return "Loading..."
     return (
         <Container className={mainStyles.wrapper}>
-          <PostCard
+          <PostCardList
+          hasNext={!!nextUrl}
+          loadMore={handleLoadMore}
            postlist={postList}           
           />
         </Container>
-    )
-}
+    );
+};
 
 export default MainPage;
