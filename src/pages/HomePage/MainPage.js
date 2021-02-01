@@ -34,10 +34,15 @@ function MainPage() {
 
     const fetchPostData = async() => {
         try {
-            const result = await axios.get(`${REACT_APP_API_BASE_URL}/user`);
+            const result = await axios.get(`${REACT_APP_API_BASE_URL}`);
             setPostList(...postList, ...result?.data?.data);
 
-        } catch (error) {
+        }  catch ({ response }) {
+          if (response) {
+            console.log(response.data.non_field_errors[0]);
+          } else {
+            console.log("Something went wrong!");
+          }
             
         }
         
