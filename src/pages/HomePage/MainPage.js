@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from  "react";
+import React, { useEffect, useState, useContext } from  "react";
 import Axios from   'axios';
 import {
     Button,
@@ -10,8 +10,9 @@ import {
   } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import PostCard from "../../components/card/PostCard";
+import { appContext } from "../../context/AppContext";
 import PostCardList from "../../components/card/PostCardList";
+
 
 
 const stylesFunc = makeStyles((theme) => ({
@@ -30,17 +31,21 @@ const stylesFunc = makeStyles((theme) => ({
   }));
 
 function MainPage() {
+  // const { test } = useContext(appContext);
   const [nextUrl, setNextUrl] = useState();
     const [postList, setPostList] = useState([]);
 
     const mainStyles = stylesFunc();
     const { REACT_APP_API_BASE_URL } = process.env;
 
-    const fetchPostList = async() => {
+    const fetchPostList = async(url = "https://django-react-blog-36.herokuapp.com/api/list/"
+    ) => {
+      
         try {
-            const result = await axios.get(`${REACT_APP_API_BASE_URL}`);
+            const result = await axios.get(url);
             setPostList(...postList, ...result?.data?.data);
             setNextUrl(result?.data?.next);
+            console.log(result)
 
         }  catch ({ response }) {
           if (response) {
