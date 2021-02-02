@@ -13,6 +13,8 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import placeholder from "../../assets/placeholder.png";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -51,7 +53,7 @@ export default function PostCard({post}) {
       <CardActionArea onClick={openPostDetails} >
         <CardMedia
           className={classes.media}
-          image={image}
+          image={image || placeholder}
           title={title}
         />
         <CardContent>

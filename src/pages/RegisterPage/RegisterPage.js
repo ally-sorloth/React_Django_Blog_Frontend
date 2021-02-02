@@ -56,11 +56,11 @@ function RegisterPage() {
               const result = await postData("https://django-react-blog-36.herokuapp.com/api/user/register/", values);
           } 
           catch ({ response }) {
-            if (response) {
-              console.log(response.data.non_field_errors[0]);
-            } else {
-              console.log("Something went wrong!");
-            }
+            // if (response) {
+            //   console.log(response.data.non_field_errors[0]);
+            // } else {
+            //   console.log("Something went wrong!");
+            // }
         }
 
         },

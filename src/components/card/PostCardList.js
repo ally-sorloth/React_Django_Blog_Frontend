@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function PostCardList({ hasNext, loadMore, postList }) {
+  console.log(postList);
   const classes = useStyles();
   return (
     <>
