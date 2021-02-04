@@ -7,36 +7,51 @@ import {
     Container,
     Avatar,
     Typography,
-    CircularProgress
+    CircularProgress,
+    Paper,
   } from "@material-ui/core";
+  import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 import { makeStyles } from "@material-ui/core/styles";
+import Image from 'material-ui-image'
 import axios from "axios";
 import { appContext } from "../../context/AppContext";
 import PostCardList from "../../components/card/PostCardList";
 
 
 
-// const stylesFunc = makeStyles((theme) => ({
-//     wrapper: {
-//       marginTop: "5rem",
-//       height: "calc(100vh - 19.0625rem)",
-//       textAlign: "center",
-//     },
-//     avatar: {
-//       margin: "1rem auto",
-//       backgroundColor: theme.palette.primary.main,
-//     },
-//     signIn: {
-//       margin: "1rem",
-//     },
-//   }));
+const stylesFunc = makeStyles((theme) => ({
+    papersty: {
+      backgroundColor: "red",
+      backgroundImage: `url(../../assets/static.bike.jpg)`
+
+    },
+
+    wrapper: {
+      marginTop: "5rem",
+      height: "calc(100vh - 19.0625rem)",
+      textAlign: "center",
+      
+    },
+    gridList: {
+      width: 500,
+      height: 450,
+    },
+  //   avatar: {
+  //     margin: "1rem auto",
+  //     backgroundColor: theme.palette.primary.main,
+  //   },
+  //   signIn: {
+  //     margin: "1rem",
+  //   },
+  }));
 
 function MainPage() {
   // const { test } = useContext(appContext);
   const [nextUrl, setNextUrl] = useState();
     const [postList, setPostList] = useState([]);
 
-    // const mainStyles = stylesFunc();
+    const mainStyles = stylesFunc();
     const { REACT_APP_API_BASE_URL } = process.env;
 
     // 
@@ -109,14 +124,23 @@ function MainPage() {
     //     </Grid>
     //   )}
     // </Container>
+    <Paper className={mainStyles.papersty}>
     
-        <Container >
-          <PostCardList
-            hasNext={!!nextUrl}
-            loadMore={handleLoadMore}
-            postList={postList}           
-          />
+        <Container className={mainStyles.wrapper} >
+           {/* <GridList cellHeight={160} className={mainStyles.gridList} cols={3}>
+            {tileData.map((tile) => (
+              <GridListTile key={tile.img} cols={tile.cols || 1}>
+                <img src={tile.img} alt={tile.title} />
+              </GridListTile>
+            ))}
+          </GridList> */}
+               <PostCardList
+                 hasNext={!!nextUrl}
+                 loadMore={handleLoadMore}
+                 postList={postList}           
+               />
         </Container>
+        </Paper>
     );
 };
 

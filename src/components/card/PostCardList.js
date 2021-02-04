@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    // width: 1600,
     "& > *": {
       margin: theme.spacing(5),
     },
@@ -26,11 +27,11 @@ function PostCardList({ hasNext, loadMore, postList }) {
   return (
     <>
       <Grid container className={classes.root} spacing={5} justify="center">
-        <Grid item xs={9}>
+        <Grid item xs={12}>
           <Grid container justify="center" spacing={5}>
             {postList
               ? postList.map((item, id) => (
-                  <Grid key={id} item>
+                  <Grid item sm={4} key={id} item>
                     <PostCard post={item} />
                   </Grid>
                 ))
