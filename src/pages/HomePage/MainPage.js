@@ -16,27 +16,27 @@ import PostCardList from "../../components/card/PostCardList";
 
 
 
-const stylesFunc = makeStyles((theme) => ({
-    wrapper: {
-      marginTop: "10rem",
-      height: "calc(100vh - 19.0625rem)",
-      textAlign: "center",
-    },
-    avatar: {
-      margin: "1rem auto",
-      backgroundColor: theme.palette.primary.main,
-    },
-    signIn: {
-      margin: "1rem",
-    },
-  }));
+// const stylesFunc = makeStyles((theme) => ({
+//     wrapper: {
+//       marginTop: "5rem",
+//       height: "calc(100vh - 19.0625rem)",
+//       textAlign: "center",
+//     },
+//     avatar: {
+//       margin: "1rem auto",
+//       backgroundColor: theme.palette.primary.main,
+//     },
+//     signIn: {
+//       margin: "1rem",
+//     },
+//   }));
 
 function MainPage() {
   // const { test } = useContext(appContext);
   const [nextUrl, setNextUrl] = useState();
     const [postList, setPostList] = useState([]);
 
-    const mainStyles = stylesFunc();
+    // const mainStyles = stylesFunc();
     const { REACT_APP_API_BASE_URL } = process.env;
 
     // 
@@ -110,7 +110,7 @@ function MainPage() {
     //   )}
     // </Container>
     
-        <Container className={mainStyles.wrapper}>
+        <Container >
           <PostCardList
             hasNext={!!nextUrl}
             loadMore={handleLoadMore}

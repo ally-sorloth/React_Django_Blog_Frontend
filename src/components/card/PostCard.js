@@ -21,7 +21,12 @@ const useStyles = makeStyles({
   },
   media: {
     height: 140,
+    padding: 60,
   },
+  image: {
+    margin: 40,
+    padding: 10,
+  }
 });
 
 
