@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -38,7 +39,29 @@ const useStyles = makeStyles({
 });
 
 
-export default function PostCard({post}) {
+export default function PostDetail({post}) {
+    const classes = useStyles();
+    const history = useHistory();
+    const [postDetail, setPostDetail] = useState([]);
+    const [comment, setComment] = useState();
+    const { REACT_APP_API_BASE_URL, REACT_APP_API_TOKEN } = process.env;
+
+    const getPostDetail = async () => {
+        try {
+            const response = await axios.get(`${REACT_APP_API_BASE_URL}/${slug}`)
+            setPostDetail(response?.data);
+            console.log(response);
+            
+        }
+        catch ({ response }) {
+            if (response) {
+              console.log(response?.data?.detail);
+            } else {
+              console.log("Something went wrong!");
+            }
+        }
+    };
+
     const {author,
         content,
         detail_url,
@@ -47,14 +70,18 @@ export default function PostCard({post}) {
         get_view_count,
         image,
         published_date,
-        slug,
-        status,
+        owner,
         title,
-        hasUserLiked = false,
-      } = post;
+        has_liked,
+        liked_url,
+        comments
+      } = postDetail;
 
-  const classes = useStyles();
-  const history = useHistory();
+      useEffect(() => {
+        getPostDetail()
+      }, [])
+
+  
   const openPostDetails = () => {
       history.push(`/detail/${slug}`);
   };
@@ -108,3 +135,15 @@ export default function PostCard({post}) {
     </Card>
   );
 }
+
+
+
+// function PostDetail() {
+//     return (
+//         <div>
+//             POSTDETAIL
+//         </div>
+//     )
+// }
+
+// export default PostDetail;

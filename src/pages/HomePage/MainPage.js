@@ -17,16 +17,18 @@ import Image from 'material-ui-image'
 import axios from "axios";
 import { appContext } from "../../context/AppContext";
 import PostCardList from "../../components/card/PostCardList";
+import bike from "../../assets/static/bike.png";
+
 
 
 
 const stylesFunc = makeStyles((theme) => ({
-    papersty: {
-      backgroundColor: "red",
-      backgroundImage: `url(../../assets/static.bike.jpg)`
 
-    },
+  divs: {
+    backgroundColor: 'red',
 
+  },
+   
     wrapper: {
       marginTop: "5rem",
       height: "calc(100vh - 19.0625rem)",
@@ -55,7 +57,7 @@ function MainPage() {
     const { REACT_APP_API_BASE_URL } = process.env;
 
     // 
-    const fetchPostList = async(url = "https://django-react-blog-36.herokuapp.com/api/list/") => {
+    const fetchPostList = async() => {
 
       // const datapost = await axios.get(url)
       //   .then((res) => setPostList(res?.data.results))
@@ -71,7 +73,7 @@ function MainPage() {
     
     // console.log(postList)
         try {
-            const result = await axios.get(url);
+            const result = await axios.get(`${REACT_APP_API_BASE_URL}list`);
             // console.log(result)
             setPostList(result?.data.results);
             // setNextUrl(result?.data?.next);
@@ -124,7 +126,8 @@ function MainPage() {
     //     </Grid>
     //   )}
     // </Container>
-    <Paper className={mainStyles.papersty}>
+    <div className={mainStyles.divs}>
+    {/* <Paper className={mainStyles.papersty}> */}
     
         <Container className={mainStyles.wrapper} >
            {/* <GridList cellHeight={160} className={mainStyles.gridList} cols={3}>
@@ -140,7 +143,8 @@ function MainPage() {
                  postList={postList}           
                />
         </Container>
-        </Paper>
+        {/* </Paper> */}
+        </div>
     );
 };
 
