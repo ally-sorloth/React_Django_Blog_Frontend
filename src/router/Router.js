@@ -3,7 +3,7 @@ import MainPage from "../pages/HomePage/MainPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import Navbar from "../components/Navbar/Navbar";
-import PostDetail from "../pages/PostDetail/PostDetail"
+import { PostDetail } from "../pages/PostDetail/PostDetail"
 
 function AppRouter() {
   return (

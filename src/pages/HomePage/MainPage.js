@@ -25,7 +25,7 @@ import bike from "../../assets/static/bike.png";
 const stylesFunc = makeStyles((theme) => ({
 
   divs: {
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
 
   },
    

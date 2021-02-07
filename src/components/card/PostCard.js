@@ -18,7 +18,6 @@ import placeholder from "../../assets/placeholder.png";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    backgroundColor: 'green',
   },
   media: {
     height: 140,

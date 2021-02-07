@@ -10,6 +10,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
+import FormGroup from "@material-ui/core/FormGroup";
 import { appContext } from "../../context/AppContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,11 +27,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuAppBar() {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  // const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
-  // const { token, setToken } = useContext(appContext);
+  const { token, setToken } = useContext(appContext);
 
 //   const handleChange = (event) => {
 //     setAuth(event.target.checked);
@@ -38,36 +39,50 @@ export default function MenuAppBar() {
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
+    
   };
+  // console.log(anchorEl);
+
+  const handleProfileClick = () => {
+    history.push("/profile");
+    setAnchorEl(null);
+  }
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  const handleMainPage = () => {
+    history.push("/");
+    setAnchorEl(null);
+  }
+
   const handleLogOut = () => {
-    
+    localStorage.removeItem("token");
+    setToken(null);
+    history.push("/");
+    setAnchorEl(null);
   };
 
 
   return (
-    <div className={classes.root}>      
+    <div className={classes.root}>
+      <FormGroup></FormGroup>      
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+          <IconButton 
+          edge="start" 
+          className={classes.menuButton} 
+          color="inherit" 
+          aria-label="menu"
+          onClick={handleMainPage}>
+           <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title} alignContent="flex-start">
           Awesome Blog
           </Typography>
-          <>
-            <Button onClick={() => history.push("/login")} color="inherit">
-                Login
-              </Button>
-              <Button onClick={() => history.push("/register")} color="inherit">
-                Register
-              </Button>
-            </>
-          {auth && (
+          
+          {token ? (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -99,7 +114,16 @@ export default function MenuAppBar() {
                 <MenuItem onClick={handleLogOut}>Logout</MenuItem>
               </Menu>
             </div>
-          )}
+          ) : (
+            <>
+            <Button onClick={() => history.push("/login")} color="inherit">
+                Login
+              </Button>
+              <Button onClick={() => history.push("/register")} color="inherit">
+                Register
+              </Button>
+            </>
+          )};
            
             {/* // <Menu onClick={() => {window.location.href = "/login"}}>Sign in</Menu>
             // <Menu onClick={() => {window.location.href = "/register"}}>Sign up</Menu>          */}
