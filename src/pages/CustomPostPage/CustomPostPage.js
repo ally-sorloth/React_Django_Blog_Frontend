@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 
-import { postData } from "../../services/postData";
+import { postData } from "../../services/PostData";
 import axios from "axios";
 const validationSchema = yup.object({
   title,
@@ -58,9 +58,10 @@ export const CustomPostPage = () => {
   const classes = useStyles();
   let { slug } = useParams();
   const [postDetail, setPostDetail] = useState([]);
+  const { REACT_APP_API_BASE_URL } = process.env;
 
   const getPostDetail = async (
-    url = `https://clarusway-blogapp.herokuapp.com/api/${slug}`
+    url = `${REACT_APP_API_BASE_URL}${slug}`
   ) => {
     try {
       const result = await axios.get(url, {
@@ -96,7 +97,7 @@ export const CustomPostPage = () => {
       try {
         const result = (await slug)
           ? axios.put(
-              `https://clarusway-blogapp.herokuapp.com/api/update/${slug}/`,
+              `${REACT_APP_API_BASE_URL}update/${slug}/`,
               values,
               {
                 headers: {
@@ -107,7 +108,7 @@ export const CustomPostPage = () => {
               }
             )
           : postData(
-              `https://clarusway-blogapp.herokuapp.com/api/create/`,
+              `${REACT_APP_API_BASE_URL}create/`,
               values
             );
         console.log(result?.data);

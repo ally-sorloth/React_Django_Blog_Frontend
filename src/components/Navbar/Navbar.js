@@ -32,7 +32,7 @@ export default function MenuAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
-  const { token, setToken } = useContext(appContext);
+  const  token  = useContext(appContext);
   const isAuth = localStorage.getItem("token");
 
 //   const handleChange = (event) => {
@@ -61,7 +61,7 @@ export default function MenuAppBar() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setToken(null);
+    // setToken(null);
     history.push("/");
     setAnchorEl(null);
   };
