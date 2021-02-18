@@ -7,6 +7,7 @@ import { CustomPostPage } from "../pages/CustomPostPage/CustomPostPage";
 import { PostDetail } from "../pages/PostDetail/PostDetail";
 import PrivateRouter from "./PrivateRouter";
 import { Suspense } from "react";
+import { ProfilePage } from "../pages/ProfilePage/ProfilePage";
 
 
 function AppRouter() {
@@ -21,9 +22,8 @@ function AppRouter() {
               <Route path="/" component={MainPage} exact/>
               <PrivateRouter exact path="/detail/:slug" component={PostDetail}/>
               <PrivateRouter exact path="/profile" component={ProfilePage}/>
-
-              <Route exact path="/create" component={CustomPostPage} />
-              <Route exact path="/edit/:slug" component={CustomPostPage} />
+              <PrivateRouter exact path="/create" component={CustomPostPage} />
+              <PrivateRouter exact path="/edit/:slug" component={CustomPostPage} />
           </Switch>
         </Router>
       </Suspense>
