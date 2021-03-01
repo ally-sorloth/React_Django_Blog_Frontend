@@ -58,7 +58,7 @@ export const PostDetail = () => {
                     "Content-Type": "application/json",
                     Authorization: "Token " + localStorage.getItem("token"),
                   },
-            })
+            });
             setPostDetail(result?.data);
             console.log(result.data);
             
@@ -114,7 +114,7 @@ export const PostDetail = () => {
       const handleDeleteClick = async () => {
         try {
           const result = await axios.delete(
-            `${REACT_APP_API_BASE_URL}/${slug}/`,
+            `${REACT_APP_API_BASE_URL}delete/${slug}/`,
             {
               headers: {
                 Accept: "application/json",
@@ -141,7 +141,7 @@ export const PostDetail = () => {
         if (key?.charCode === 13) {
           try {
             const result = await axios.post(
-              `https://clarusway-blogapp.herokuapp.com/api/comment/${slug}/`,
+              `${REACT_APP_API_BASE_URL}comment/${slug}/`,
               { content: comment },
               {
                 headers: {
