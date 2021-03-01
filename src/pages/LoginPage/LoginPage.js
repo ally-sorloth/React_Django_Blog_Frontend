@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useContext} from "react";
 import {
   Button,
   TextField,
@@ -9,9 +9,12 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // import firebase from "../firebase/firebase.utils";
-import { Formik } from "formik";
+import { useFormik, Formik } from "formik";
 import * as Yup from "yup";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { useHistory } from "react-router-dom";
+import { postData } from "../../services/PostData";
+import { appContext } from "../../context/AppContext";
 
 const signInValidationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid Email").required("Email is required!!"),
@@ -43,7 +46,33 @@ const initialValues = {
 function LoginPage () {
   const [loginError,setLoginError]=useState(null)
   const signinStyles = stylesFunc();
+  const history = useHistory();
+  const { token, setToken } = useContext(appContext);
 
+  const formik = useFormik({
+    initialValues: {
+      email:"",
+      password:"",
+    },
+    validationSchema: signInValidationSchema,
+    onSubmit: async (values) => {
+      try {
+        const result = await postData(
+          `https://django-react-blog-36.herokuapp.com/dj-rest-auth/login/`,
+          values
+        );
+        setToken(result?.data?.key)
+        localStorage.setItem("token", result?.dat?.key);
+        history.push("/");
+      } catch ({ response }) {
+        if (response) {
+          console.log(response.data.non_field_errors[0]);
+        } else {
+          console.log("Something went wrong!");
+        }
+      }
+    },
+  });
   // const handleGoogleButtonClick = () => {
   //   firebase.useGoogleProvider();
   // };
@@ -71,7 +100,7 @@ function LoginPage () {
       <Formik
         initialValues={initialValues}
         validationSchema={signInValidationSchema}
-        // onSubmit={handleFormSubmit}
+        onSubmit={formik.handleSubmit}
       >
         {({ handleSubmit, handleChange, values, errors }) => (
           <form onSubmit={handleSubmit}>
