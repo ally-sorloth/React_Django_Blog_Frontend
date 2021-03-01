@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { title, content } from "../../utils/validations";
 import TextField from "@material-ui/core/TextField";
@@ -58,7 +58,9 @@ export const CustomPostPage = () => {
   const classes = useStyles();
   let { slug } = useParams();
   const [postDetail, setPostDetail] = useState([]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const { REACT_APP_API_BASE_URL } = process.env;
+  const history = useHistory();
 
   const getPostDetail = async (
     url = `${REACT_APP_API_BASE_URL}${slug}`
@@ -132,6 +134,11 @@ export const CustomPostPage = () => {
       });
   }, [postDetail]);
 
+  const handleMainPage = () => {
+    history.push("/");
+    setAnchorEl(null);
+  }
+
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item xs={12} component={Paper} elevation={6} square>
@@ -183,6 +190,7 @@ export const CustomPostPage = () => {
               fullWidth
               type="submit"
               className={classes.submit}
+              onClick={handleMainPage}
             >
               Submit
             </Button>

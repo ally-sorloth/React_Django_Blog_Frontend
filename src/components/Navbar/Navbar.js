@@ -86,6 +86,7 @@ export default function MenuAppBar() {
             </Typography>
             {token ? (
               <div>
+                Username
                 <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"

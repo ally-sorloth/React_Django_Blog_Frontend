@@ -20,10 +20,10 @@ function AppRouter() {
               <Route path="/register" component={RegisterPage} exact/>
               <Route path="/login" component={LoginPage} exact/>
               <Route path="/" component={MainPage} exact/>
-              <PrivateRouter exact path="/detail/:slug" component={PostDetail}/>
-              <PrivateRouter exact path="/profile" component={ProfilePage}/>
-              <PrivateRouter exact path="/create" component={CustomPostPage} />
-              <PrivateRouter exact path="/edit/:slug" component={CustomPostPage} />
+              <Route exact path="/profile" component={ProfilePage}/>
+              <Route exact path="/detail/:slug" component={PostDetail}/>
+              <Route exact path="/create" component={CustomPostPage} />
+              <Route exact path="/edit/:slug" component={CustomPostPage} />
           </Switch>
         </Router>
       </Suspense>
