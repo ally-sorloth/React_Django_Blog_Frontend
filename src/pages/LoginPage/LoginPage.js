@@ -1,4 +1,4 @@
-import React,{useState, useContext} from "react";
+import React, {useState, useContext} from "react";
 import {
   Button,
   TextField,
@@ -58,11 +58,11 @@ function LoginPage () {
     onSubmit: async (values) => {
       try {
         const result = await postData(
-          `https://django-react-blog-36.herokuapp.com/dj-rest-auth/login/`,
+          "https://django-react-blog-36.herokuapp.com/dj-rest-auth/login/",
           values
         );
         setToken(result?.data?.key)
-        localStorage.setItem("token", result?.dat?.key);
+        localStorage.setItem("token", result?.data?.key);
         history.push("/");
       } catch ({ response }) {
         if (response) {
