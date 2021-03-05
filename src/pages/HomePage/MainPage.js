@@ -26,7 +26,15 @@ const stylesFunc = makeStyles((theme) => ({
 
   divs: {
     // backgroundColor: 'red',
-
+    backgroundImage: "url(https://picsum.photos/640/480)",
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "1280px"
   },
    
     wrapper: {
