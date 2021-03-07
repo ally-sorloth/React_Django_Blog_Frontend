@@ -171,7 +171,7 @@ function LoginPage () {
               type="submit"
               className={classes.submit}
             >
-              Submit
+              Login
             </Button>
           </form>
           {/*           <Grid container className={classes.linkWrapper}>
